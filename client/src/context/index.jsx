@@ -24,9 +24,29 @@ export const StateContextProvider = ({ children }) => {
   const connect = useMetamask();
 
   const publishCampaign = async (form) => {
-    const data = await createCampaign([
-      address, //owner
-      form.title,
-    ]);
+    try {
+      const data = await createCampaign([
+        address, //owner
+        form.title,
+        form.description,
+        form.target,
+        new Date(form.deadline).getTime(), //deadline
+        form.image,
+      ]);
+
+      console.log("contract call success", data);
+    } catch (error) {
+      console.log("contract call error", error);
+    }
   };
+
+  return (
+    <StateContext.Provider
+      value={{ address, contract, connect, createCampaign: publishCampaign }}
+    >
+      {children}
+    </StateContext.Provider>
+  );
 };
+
+export const useStateContext = () => useContext(StateContext);

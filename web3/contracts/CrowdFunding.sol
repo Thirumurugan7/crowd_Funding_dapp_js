@@ -22,7 +22,6 @@ contract CrowdFunding {
         address _owner,
         string memory _title,
         string memory _description,
-        uint _amountCollected,
         uint _target,
         uint _deadline,
         string memory _image
@@ -37,7 +36,7 @@ contract CrowdFunding {
         campaign.owner = _owner;
         campaign.title = _title;
         campaign.description = _description;
-        campaign.amountCollected = _amountCollected;
+        campaign.amountCollected = 0;
         campaign.target = _target;
         campaign.deadline = _deadline;
         campaign.image = _image;
